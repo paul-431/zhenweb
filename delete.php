@@ -1,15 +1,15 @@
 <?php
+include 'config.php';
 
-require_once ('connect.php');
+if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+    $id = $_POST['id'];
+    
+    $sql = "DELETE FROM `users` WHERE `id` = '$id'";
 
-	$id = $_GET['id'];
-	$DelSql = "DELETE FROM `etudiant` WHERE id=$id";
+    if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully";
+    } else {
+        echo "Error deleting record: ". $conn->error;
+    }
+}
 
-	$res = mysqli_query($conn, $DelSql);
-	if ($res) {
-		header("Location: view.php");
-	}else{
-		echo "Failed to delete";
-	}
-
- ?>

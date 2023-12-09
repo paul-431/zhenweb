@@ -1,0 +1,73 @@
+html
+<!-- Form in HTML for Create (create.php), Update (update.php), and Delete (delete.php) pages -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    <h2>CRUD Form</h2>
+
+    <form id="crudForm">
+        <!-- For Update and Delete operations, include an input for ID -->
+        <div class="form-group" style="display:none;">
+            <label for="id">ID:</label>
+            <input type="text" class="form-control" id="id" name="id">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+    </form>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Custom JavaScript for form submission -->
+<script>
+    function submitForm() {
+        // Get form data
+        var formData = $("#crudForm").serialize();
+
+        // Perform AJAX request to your PHP file (create.php, update.php, or delete.php)
+        $.ajax({
+            type: "POST",
+            url: "create.php", // Change this URL based on the operation you want to perform
+            data: formData,
+            success: function (data) {
+                alert(data); // Display success or error message
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
